@@ -396,7 +396,7 @@ MapType ::= 'map' '(' ( '*' | (AtomicOrUnionType ',' SequenceType) ) ')'
 
 MapConstructor ::= 'map' '{' (MapConstructorEntry ("," MapConstructorEntry)*)? '}'
 
-MapConstructorEntry	::= ExprSingle ":" ExprSingle
+MapConstructorEntry	::= ExprSingle ":" "="? ExprSingle
 
 JSONTest ::=
           JSONItemTest
