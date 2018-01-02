@@ -388,9 +388,16 @@ ItemType ::= KindTest
            | FunctionTest
            | AtomicOrUnionType
            | ParenthesizedItemType
+           | ArrayTest
            | JSONTest
            | MapType
            | StructuredItemTest
+
+ArrayTest ::= AnyArrayTest | TypedArrayTest
+
+AnyArrayTest ::= "array" "(" "*" ")"
+
+TypedArrayTest ::= "array" "(" SequenceType ")"
 
 MapType ::= 'map' '(' ( '*' | (AtomicOrUnionType ',' SequenceType) ) ')'
 
@@ -1033,7 +1040,11 @@ PairConstructorList ::= PairConstructor ("," PairConstructor)*
 
 PairConstructor ::=  ExprSingle ":" ExprSingle
 
-ArrayConstructor ::=  "[" Expr? "]"
+ArrayConstructor ::= SquareArrayConstructor | CurlyArrayConstructor
+
+SquareArrayConstructor ::= "[" (ExprSingle ("," ExprSingle)*)? "]"
+
+CurlyArrayConstructor ::= "array" EnclosedExpr
 
 BlockExpr
          ::= '{' StatementsAndOptionalExpr '}'
